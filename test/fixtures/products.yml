@@ -4,8 +4,10 @@ one:
   title: MyString
   price: 1.5
   inventory_count: 1
+  description: MyText
 
 two:
   title: MyString
   price: 1.5
   inventory_count: 1
+  description: MyText

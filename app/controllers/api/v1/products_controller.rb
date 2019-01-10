@@ -20,10 +20,25 @@ module Api
                     render json: {status: 'ERROR', message: 'New coffee product not saved', data: product.errors}, status: :unprocessable_entity
                 end
             end
-            private 
-                def product_params
-                    params.permit(:title, :price, :inventory_count, :description)
+            
+            def destroy
+                product = Product.find(params[:id])
+                render json: {status: 'SUCCESS', message: 'Deleted coffee product', data: product}, status: :ok          
+            end
+
+            def update
+                product = Product.find(params[:id])
+                
+                if (product.update_attributes(product_params))
+                    render json: {status: 'SUCCESS', message: 'Updated coffee product', data: product}, status: :ok          
+                else
+                    render json: {status: 'ERROR', message: 'Coffee product not updated', data: product.errors}, status: :unprocessable_entity
                 end
+            end
+
+            private def product_params
+                params.permit(:title, :price, :inventory_count, :description)
+            end
         end
     end
 end

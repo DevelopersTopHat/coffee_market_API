@@ -5,5 +5,5 @@ Rails.application.routes.draw do
       resources :products
       get '/in_stock', controller: 'products', action: 'in_stock' 
     end
-  end
+  end  
 end

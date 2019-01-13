@@ -2,24 +2,24 @@ module Api
     module V1
         class ProductsController < ApplicationController
             # Allows GET request that displays all coffee products as JSON by creation date
-            # To hit the endpoint /v1/products
+            # To hit the endpoint api/v1/products
             def index
                 products = Product.order('created_at DESC');
                 render json: {status: 'SUCCESS', message: 'Loaded coffee products', data: products}, status: :ok
             end
 
             # Allows GET request that displays specified coffee product by id as JSON
-            # To hit the endpoint /v1/products/1
+            # To hit the endpoint api/v1/products/1
             # Note: the value after /products/ can be any id in the product table
             # Also allows GET request that displays all stocked coffee products as JSON
-            # To hit the endpoint /v1/products/in_stock
+            # To hit the endpoint api/v1/products/in_stock
             def show
                 product = Product.find(params[:id]);
                 render json: {status: 'SUCCESS', message: 'Loaded coffee product', data: product}, status: :ok
             end
 
             # Allows POST request that creates a new row in the product table
-            # To hit the endpoint /v1/products setting the header to content-type application/json
+            # To hit the endpoint api/v1/products setting the header to content-type application/json
             # Note: all the product parameters are mandatory, (title, price, inventory_count, description)
             def create
                 product = Product.new(product_params)
@@ -32,7 +32,7 @@ module Api
             end
             
             # Allows DELETE request that removes a row by id in the product table
-            # To hit the endpoint /v1/products/1
+            # To hit the endpoint api/v1/products/1
             # Note: the value after /products/ can be any id in the product table
             def destroy
                 product = Product.find(params[:id])
@@ -41,7 +41,7 @@ module Api
             end
 
             # Allows PUT request that updates a row in the product table
-            # To hit the endpoint /v1/products/1 setting the header to content-type application/json
+            # To hit the endpoint api/v1/products/1 setting the header to content-type application/json
             # Note: all the product parameters are mandatory, (title, price, inventory_count, description)
             # Note: the value after /products/ can be any id in the product table
             def update
@@ -59,6 +59,8 @@ module Api
                 params.permit(:title, :price, :inventory_count, :description)
             end
 
+            # Allows GET request that displays all stocked coffee products as JSON by creation date
+            # To hit the endpoint api/v1/in_stock
             def in_stock
                 products = Product.where('inventory_count > 0').order('updated_at DESC');
                 render json: {status: 'SUCCESS', message: 'Loaded stocked coffee products', data: products}, status: :ok

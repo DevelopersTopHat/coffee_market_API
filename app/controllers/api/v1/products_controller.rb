@@ -14,13 +14,8 @@ module Api
             # Also allows GET request that displays all stocked coffee products as JSON
             # To hit the endpoint /v1/products/in_stock
             def show
-                if (params[:id] == 'in_stock') 
-                    products = Product.where('inventory_count > 0').order('updated_at DESC');
-                    render json: {status: 'SUCCESS', message: 'Loaded stocked coffee products', data: products}, status: :ok
-                else
-                    product = Product.find(params[:id]);
-                    render json: {status: 'SUCCESS', message: 'Loaded coffee product', data: product}, status: :ok
-                end
+                product = Product.find(params[:id]);
+                render json: {status: 'SUCCESS', message: 'Loaded coffee product', data: product}, status: :ok
             end
 
             # Allows POST request that creates a new row in the product table
@@ -41,6 +36,7 @@ module Api
             # Note: the value after /products/ can be any id in the product table
             def destroy
                 product = Product.find(params[:id])
+                product.destroy
                 render json: {status: 'SUCCESS', message: 'Deleted coffee product', data: product}, status: :ok          
             end
 
@@ -61,6 +57,11 @@ module Api
             # Attrtibutes needed to do a create/update query
             private def product_params
                 params.permit(:title, :price, :inventory_count, :description)
+            end
+
+            def in_stock
+                products = Product.where('inventory_count > 0').order('updated_at DESC');
+                render json: {status: 'SUCCESS', message: 'Loaded stocked coffee products', data: products}, status: :ok
             end
         end
     end

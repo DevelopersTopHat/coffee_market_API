@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   namespace 'api' do
     namespace 'v1' do
       resources :products
-      get 'products/in_stock', controller: 'products', action: 'in_stock' 
+      get '/in_stock', controller: 'products', action: 'in_stock' 
     end
   end
 end

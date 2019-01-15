@@ -58,7 +58,9 @@ POST http://localhost:3000/api/v1/products
 With the header key: Content-Type
 and the header value: application/json
 
-The body of the Json must contain the attributes: title (string), price (float), inventory_count (integer), description (text)
+The body of the Json must contain the 
+attributes: title (string), price (float), inventory_count (integer), description (text)
+```
 ```
 To update an item (row) in the database table:
 
@@ -67,7 +69,8 @@ PUT http://localhost:3000/api/v1/products/1
 With the header key: Content-Type
 and the header value: application/json
 
-The body of the Json can contain any of the following attributes: title (string), price (float), inventory_count (integer), description (text)
+The body of the Json can contain any of the following 
+attributes: title (string), price (float), inventory_count (integer), description (text)
 ```
 To query all in-stock items:
 

@@ -72,6 +72,7 @@ and the header value: application/json
 The body of the Json can contain any of the following 
 attributes: title (string), price (float), inventory_count (integer), description (text)
 ```
+```
 To query all in-stock items:
 
 GET http://localhost:3000/api/v1/in_stock

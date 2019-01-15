@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace 'v1' do
       resources :products
       get '/in_stock', controller: 'products', action: 'in_stock' 
+      put '/purchase/:id', controller: 'products', action: 'purchase' 
     end
   end  
 end
